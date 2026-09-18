@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#091d2b" />
+  <meta name="description" content="Наше маленькое путешествие в Абхазию — выбирай места, сохраняй желания и собирай маршрут вдвоём." />
+  <title>Наше путешествие • Абхазия ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div id="heart-layer" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="На главную">
+      <span class="brand-dot">♥</span>
+      <span>наше лето</span>
+    </a>
+    <nav>
+      <a href="#places">Места</a>
+      <a href="#wish">Пожелания</a>
+      <a href="#journey">Наш маршрут</a>
+    </nav>
+    <button class="ghost-btn" id="ownerBtn" type="button">Для организатора</button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-glow glow-a"></div>
+      <div class="hero-glow glow-b"></div>
+      <div class="hero-content">
+        <div class="eyebrow"><span class="spark">✦</span> Абхазия • наше путешествие</div>
+        <h1>Там, где<br><em>мы вдвоём</em></h1>
+        <p class="hero-sub">Выбирай места, куда тебе хочется поехать. Я превращу твой список в наше маленькое приключение.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#places">Начать выбирать <span>↓</span></a>
+          <button class="mini-note" id="surpriseBtn" type="button"><span>✦</span> Сюрприз для тебя</button>
+        </div>
+        <div class="hero-meta">
+          <div><strong id="selectedHero">0</strong><span>мест выбрано</span></div>
+          <div><i></i></div>
+          <div><strong id="wishHero">0</strong><span>желаний</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="photo-card photo-back"></div>
+        <div class="photo-card photo-main">
+          <div class="photo-caption"><span>Абхазия</span><b>любовь × море</b></div>
+        </div>
+        <div class="floating-polaroid polaroid-one"><span>♥</span><b>куда угодно</b><small>главное — вместе</small></div>
+        <div class="floating-polaroid polaroid-two"><span>✦</span><b>ещё одно</b><small>«а давай сюда?»</small></div>
+      </div>
+      <div class="scroll-cue">листай <span>⌄</span></div>
+    </section>
+
+    <section class="intro section" id="places">
+      <div class="section-kicker">01 • выбираем вместе</div>
+      <div class="section-head">
+        <div>
+          <h2>Места, которые<br><em>могут стать нашими</em></h2>
+        </div>
+        <p>Нажимай <b>«Хочу сюда»</b>, а любимые места сами соберутся в твой маршрут.</p>
+      </div>
+
+      <div class="filter-row" role="tablist" aria-label="Фильтр мест">
+        <button class="filter active" data-filter="all" type="button">Все</button>
+        <button class="filter" data-filter="nature" type="button">Природа</button>
+        <button class="filter" data-filter="sea" type="button">Море</button>
+        <button class="filter" data-filter="history" type="button">Атмосфера</button>
+      </div>
+
+      <div class="places-grid" id="placesGrid"></div>
+    </section>
+
+    <section class="wish-section section" id="wish">
+      <div class="wish-card">
+        <div class="wish-copy">
+          <div class="section-kicker">02 • место для твоих идей</div>
+          <h2>А чего хочется<br><em>именно тебе?</em></h2>
+          <p>Можно написать что угодно: «хочу закат у моря», «хочу вкусно поесть», «хочу место без людей» или просто своё маленькое желание.</p>
+          <div class="wish-stamp">пиши всё, что приходит в голову <span>♡</span></div>
+        </div>
+        <div class="wish-chat" id="wishChat">
+          <div class="chat-top"><span class="online-dot"></span><b>наши пожелания</b><span id="chatCount">0</span></div>
+          <div class="messages" id="messages">
+            <div class="empty-chat" id="emptyChat">
+              <span>♡</span>
+              <b>Здесь пока тихо</b>
+              <small>Напиши первое желание —<br>оно станет частью нашего маршрута.</small>
+            </div>
+          </div>
+          <form class="chat-form" id="wishForm">
+            <input id="wishInput" maxlength="180" autocomplete="off" placeholder="Напиши своё желание…" />
+            <button type="submit" aria-label="Отправить пожелание">➤</button>
+          </form>
+          <div class="chat-hint">Наши пожелания синхронизируются между телефонами ✦</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="journey section" id="journey">
+      <div class="section-kicker">03 • наш маршрут</div>
+      <div class="section-head">
+        <h2>То, что уже<br><em>стало нашим</em></h2>
+        <p>Здесь появляются места, которые ты выбрала. Можно передумать в любой момент — путешествие должно быть лёгким.</p>
+      </div>
+
+      <div class="journey-layout">
+        <div class="route-card">
+          <div class="route-top"><span>Мой выбор</span><strong id="selectedCount">0</strong></div>
+          <div id="selectedList" class="selected-list">
+            <div class="selected-empty"><span>♡</span><b>Маршрут ещё пуст</b><small>Выбери первое место выше.</small></div>
+          </div>
+          <div class="route-footer">
+            <span>точно едем:</span>
+            <b id="routeTotal">0 мест</b>
+          </div>
+        </div>
+        <div class="love-note">
+          <div class="note-paper">
+            <span class="note-pin">♥</span>
+            <div class="section-kicker">маленькая заметка</div>
+            <h3>Неважно,<br>куда именно.</h3>
+            <p>Потому что самые хорошие места — те, где ты рядом.</p>
+            <div class="scribble">Р. × Т.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-section section">
+      <div class="final-card">
+        <div class="final-sky"></div>
+        <div class="section-kicker">04 • до встречи с морем</div>
+        <h2>Собираем<br><em>наше лето</em></h2>
+        <p>Выбирай. Мечтай. Добавляй свои идеи. А остальное мы сделаем вместе.</p>
+        <button class="primary-btn" id="saveBtn" type="button">Сохранить наши планы <span>♥</span></button>
+        <div class="final-counter"><span id="finalPlaces">0 мест</span><i>•</i><span id="finalWishes">0 пожеланий</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>сделано с любовью</span><span>♥</span><span>для двоих</span>
+  </footer>
+
+
+  <section class="photo-credits-wrap">
+    <details class="photo-credits">
+      <summary>Фотографии мест • источники и авторы</summary>
+      <div class="credits-grid">
+        <a href="https://commons.wikimedia.org/wiki/File:%D0%9E%D0%B7%D0%B5%D1%80%D0%BE_%D0%A0%D0%B8%D1%86%D0%B0_%D0%90%D0%B1%D1%85%D0%B0%D0%B7%D0%B8%D1%8F.jpg" target="_blank" rel="noopener">Озеро Рица — Avobukhov · CC BY 4.0</a>
+        <a href="https://commons.wikimedia.org/wiki/File:Abkhazia._Gagra_P9090001_2600.jpg" target="_blank" rel="noopener">Гагра — Alexxx1979 · лицензия указана на Commons</a>
+        <a href="https://commons.wikimedia.org/wiki/File:Abkhazia._New_Athos_P9130481_2600.jpg" target="_blank" rel="noopener">Новый Афон — Alexxx1979 · CC BY-SA 4.0</a>
+        <a href="https://commons.wikimedia.org/wiki/Category:Yupshara_River" target="_blank" rel="noopener">Юпшарский каньон — Wikimedia Commons · лицензия указана у файла</a>
+        <a href="https://commons.wikimedia.org/wiki/File:Central_Sukhumi,_Abkhazia.jpg" target="_blank" rel="noopener">Сухум — Wikimedia Commons · лицензия указана у файла</a>
+        <a href="https://commons.wikimedia.org/wiki/File:Abkhazia._Gegsky_waterfall_P9100123_2600.jpg" target="_blank" rel="noopener">Гегский водопад — Alexxx1979 · CC BY-SA 4.0</a>
+        <a href="https://commons.wikimedia.org/wiki/File:Blue_Lake,_Abkhazia.jpg" target="_blank" rel="noopener">Голубое озеро — Ksenialiana · лицензия указана на Commons</a>
+        <a href="https://commons.wikimedia.org/wiki/File:Pitsunda,_Abkhazia,_Beach_of_Black_Sea.jpg" target="_blank" rel="noopener">Пицунда — Vyacheslav Argenberg · лицензия указана на Commons</a>
+        <a href="https://commons.wikimedia.org/wiki/File:%D0%90%D0%BD%D0%B0%D0%BA%D0%BE%D0%BF%D0%B8%D0%B9%D1%81%D0%BA%D0%B0%D1%8F_%D0%BA%D1%80%D0%B5%D0%BF%D0%BE%D1%81%D1%82%D1%8C.jpg" target="_blank" rel="noopener">Анакопийская крепость — Wikimedia Commons · CC BY-SA 4.0</a>
+      </div>
+    </details>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal-backdrop" id="ownerModal" aria-hidden="true">
+    <div class="owner-modal" role="dialog" aria-modal="true" aria-labelledby="ownerTitle">
+      <button class="close-modal" id="closeOwner" type="button" aria-label="Закрыть">×</button>
+      <div class="section-kicker">режим организатора</div>
+      <h3 id="ownerTitle">Маршрут <em>готов?</em></h3>
+      <p>Этот блок помогает тебе быстро увидеть выбранные места и пожелания на текущем устройстве.</p>
+      <div class="owner-stats">
+        <div><b id="ownerPlaces">0</b><span>мест</span></div>
+        <div><b id="ownerWishes">0</b><span>пожеланий</span></div>
+      </div>
+      <div class="owner-actions">
+        <button class="secondary-btn" id="exportBtn" type="button">Скопировать планы</button>
+        <button class="danger-btn" id="clearBtn" type="button">Очистить выбор</button>
+      </div>
+      <div class="owner-wishes-wrap">
+        <div class="owner-mini-title">входящие пожелания</div>
+        <div id="ownerWishList" class="owner-wish-list"></div>
+      </div>
+      <small class="modal-note">PIN организатора хранится на сервере через переменную ADMIN_PIN. Не публикуй его вместе с сайтом.</small>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
